@@ -1,0 +1,5 @@
+name = "ceasar-server"
+
+[vars]
+MONGODB_URI = "mongodb+srv://cesear-usr:e!an-e*4Ha2uPhs@cluster0.xveckpm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+JWT_SECRET = "qK]pL7Sk<ph-WKG$%Tr{qW8`<~(g<a<WK$|q[Yqelz$Oi@g~-%j:ri|&a~+74|*1"
