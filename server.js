@@ -24,7 +24,7 @@ app.use(cors({
 }));
 
 // Connect to MongoDB Atlas
-mongoose.connect(env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("Connected to MongoDB Atlas..."))
     .catch(err => console.error("Could not connect to MongoDB Atlas...", err));
 
@@ -102,7 +102,7 @@ app.post('/login', loginLimiter, async (req, res) => {
         }
 
         // Generate JWT token
-        const token = generateToken(user, env.JWT_SECRET);
+        const token = generateToken(user, process.env.JWT_SECRET);
         res.json({ token, expiresAt: new Date(jwt.decode(token).exp * 1000).toISOString() });
     } catch (error) {
         console.error('Login failed:', error);
@@ -121,7 +121,7 @@ app.post('/validate', async (req, res) => {
 
     try {
         // Decode and verify token
-        const decoded = jwt.verify(token, env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         // Check if user exists
         const user = await User.findById(decoded.user.id);
@@ -131,7 +131,7 @@ app.post('/validate', async (req, res) => {
 
         // Reconstruct expected signature to verify it
         const expectedSignature = crypto
-            .createHmac('sha3-512', env.JWT_SECRET)
+            .createHmac('sha3-512', process.env.JWT_SECRET)
             .update(JSON.stringify({ ...decoded, signature: undefined }))
             .digest('hex');
 
