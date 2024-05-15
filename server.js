@@ -9,7 +9,7 @@ const Joi = require('joi');
 const crypto = require('crypto');
 const validator = require('validator');
 const xss = require('xss');
-require('dotenv').config();
+// require('dotenv').config();
 
 // Create an Express application
 const app = express();
